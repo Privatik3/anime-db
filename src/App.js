@@ -1,25 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from 'react';
+import {animePage} from './static_data'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [animeData, setAnimeData] = useState({});
+
+    useEffect(() => {
+        setAnimeData(animePage);
+    }, []);
+
+    return (
+        <div>
+            <div>{animeData.img}</div>
+            <div>{animeData.title}</div>
+            <div>{animeData.description}</div>
+        </div>
+    );
 }
 
 export default App;
