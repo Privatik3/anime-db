@@ -70,6 +70,10 @@ module.exports = {
             running: "approx. 10h 50m"
         },
         description: "* Based on the CyberConnect2 hit game.\n\n The Movie will be placed in the storyline of each .hack//G.U. games trilogy. The story follows Haseo, a player in the online MMORPG called The World:R2 at first depicted as a PKK (Player Killer Killer) known as the \"Terror of Death\", a former member of the disbanded Twilight Brigade guild. Haseo encounters Azure Kite (believing him to be Tri-Edge and blaming him for what happened to Shino) but is hopelessly outmatched. Azure Kite easily defeats Haseo and Data Drains him, reducing his level from 133 to 1 and leaving him without any items, weapons, or member addresses. He is left with a mystery on his hands as to the nature of the Data Drain and why Azure Kite is in possession of such a skill.",
-        gallery: []
+        comments: [
+            {nick: "Anime fan", rating: 3, date: "09.05.2022", body: "Very interesting anime, thanks to it I became one step closer to the confidence in my suicidal tendencies"},
+            {nick: "Alex", rating: 5, date: "07.05.2022", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"},
+            {nick: "Petro", rating: 2, date: "04.05.2022", body: "Naruto is better"}
+        ]
     }
 }
