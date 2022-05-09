@@ -4,6 +4,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        '2p': '2px',
+      },
       padding: {
         '3p': '3px',
       },
@@ -16,6 +19,7 @@ module.exports = {
       },
       spacing: {
         '30p': '30px',
+        '10p': '10px',
       },
       fontSize: {
         '8p': ['8px', {
