@@ -4,6 +4,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      padding: {
+        '3p': '3px',
+      },
       fontFamily: {
         'mont': ['Montserrat', 'sans-serif']
       },

@@ -4,11 +4,14 @@ import logo from "./resources/Logo.png";
 import anime from "./resources/Anime.png";
 import CatalogItemGrid from "./CatalogItem";
 import CatalogItemTable from "./CatalogItemTable";
+import CatalogFilter from "./CatalogFilter";
+import escapeClassName from "tailwindcss/lib/util/escapeClassName";
 
 function Page(props) {
     const [animeData, setAnimeData] = useState({});
     const [catalogItemsData, setCatalogItemsData] = useState([]);
     const [isDisplayGrid, setDisplayGrid] = useState(true);
+    const [isLogoClicked, setLogoClicked] = useState(false);
 
     useEffect(() => {
         setAnimeData(animePage);
@@ -20,8 +23,10 @@ function Page(props) {
         <div className={`flex flex-col w-[1150px] mx-auto font-mont gap-4`}>
 
             <div className={`flex justify-between items-end`}>
-                <div className="logo">
+                <div className="logo flex text-5xl font-bold gap-5 text-primary items-end">
+                    <button onClick={()=>setLogoClicked(true)} className={`absolute w-1 h-1 top-0`}></button>
                     <img src={logo} alt="logo"/>
+                    <span className={`flex items-end leading-9`}>Anime<span className={`${isLogoClicked ? `text-second` : ``}`}>Db</span></span>
                 </div>
                 <div className={`gap-5 flex`}>
                     <button className="login border-4 border-primary w-32 h-10 text-xl font-semibold text-primary rounded-sm">Login</button>
@@ -69,16 +74,15 @@ function Page(props) {
                         </div>
                     </div>
                     <div className={`flex gap-2.5`}>
-                        <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>All</div>
-                        <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>0-9</div>
-                        <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>A</div>
-                        <div className={`cursor-pointer text-sm bg-second text-primary decoration-1 underline font-semibold border-primary border-2 h-30p w-30p items-center flex justify-center`}>B</div>
-                        <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>C</div>
-                        <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>D</div>
-                        <div className={`cursor-pointer text-sm bg-second text-primary decoration-1 underline font-semibold border-primary border-2 h-30p w-30p items-center flex justify-center`}>E</div>
-                        <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>F</div>
-                        <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>G</div>
-                        <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>H</div>
+
+                        {
+
+                            ["All", "0-9", "A", "B", "C", "D", "E", "F", "G", "H"].map((item, index) => {
+                                // <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>A</div>
+                                // <div className={`cursor-pointer text-sm bg-second text-primary decoration-1 underline font-semibold border-primary border-2 h-30p w-30p items-center flex justify-center`}>B</div>
+                                return <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-30p items-center flex justify-center`}>{item}</div>
+                            })
+                        }
                         <div className={`cursor-pointer text-sm bg-primary text-second border-primary border-2 h-30p w-[60px] items-center flex justify-center`}>Other</div>
                     </div>
                 </div>
@@ -107,13 +111,13 @@ function Page(props) {
                 <div className={`w-1/4`}>
                     <div className={`border-2 border-primary w-[270px] rounded-sm p-2 gap-2.5 flex flex-col ml-auto`}>
                         <div className={`border border-primary w-[250px] rounded-sm flex py-2.5 px-4 justify-between `}>
-                            <div className={`leading-3 cursor-pointer text-sm bg-primary text-second border-primary border-2 items-center flex justify-center py-1.5 px-2.5`}>
+                            <div onClick={()=>setCatalogItemsData([])} className={`leading-3 cursor-pointer text-sm bg-primary text-second border-primary border-2 items-center flex justify-center py-1.5 px-2.5`}>
                                 <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M14.5606 2.60524L6.64752 10.5178C6.06154 11.1039 5.11099 11.1039 4.52446 10.5178L0.439649 6.43271C-0.14655 5.84662 -0.14655 4.89596 0.439649 4.30976C1.02596 3.72345 1.97643 3.72345 2.56248 4.30954L5.5863 7.3334L12.4375 0.482184C13.0238 -0.104126 13.9743 -0.103682 14.5604 0.482184C15.1465 1.06838 15.1465 2.01871 14.5606 2.60524Z" fill="#FCE77E"/>
                                 </svg>
                                 &#160;Apply Filter
                             </div>
-                            <div className={`leading-3 cursor-pointer text-sm bg-primary text-second border-primary border-2 items-center flex justify-center py-1.5 px-2.5`}>
+                            <div onClick={()=>setCatalogItemsData(catalogItems)} className={`leading-3 cursor-pointer text-sm bg-primary text-second border-primary border-2 items-center flex justify-center py-1.5 px-2.5`}>
                                 <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M2.85355 0.146453C3.04882 0.341713 3.04882 0.658292 2.85355 0.853552L1.70711 2H7C9.4853 2 11.5 4.01472 11.5 6.5C11.5 8.9853 9.4853 11 7 11H3C2.72386 11 2.5 10.7761 2.5 10.5C2.5 10.2239 2.72386 10 3 10H7C8.933 10 10.5 8.433 10.5 6.5C10.5 4.567 8.933 3 7 3H1.70711L2.85355 4.14645C3.04882 4.34171 3.04882 4.65829 2.85355 4.85355C2.65829 5.04882 2.34171 5.04882 2.14645 4.85355L0.146453 2.85355C-0.0488175 2.65829 -0.0488175 2.34171 0.146453 2.14645L2.14645 0.146453C2.34171 -0.0488175 2.65829 -0.0488175 2.85355 0.146453Z" fill="#FCE77E"/>
                                 </svg>
@@ -124,81 +128,9 @@ function Page(props) {
                         <span className="text-primary">Filter
                             <hr className="border-primary"></hr>
                         </span>
-
-                        <div className={`border border-primary w-[250px] rounded-sm flex p-2.5 justify-between flex-col gap-1`}>
-                            <span className={`text-primary mx-auto decoration-1 underline font-semibold text-xl`}>Airing Status</span>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter0"></input>
-                                <span className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter0">ignore</label>
-                            </div>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter1"></input>
-                                <span className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter1">still airing</label>
-                            </div>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter2"></input>
-                                <span className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter2">finished</label>
-                            </div>
-                        </div>
-                        <div
-                            className={`border border-primary w-[250px] rounded-sm flex p-2.5 justify-between flex-col gap-1`}>
-                            <span className={`text-primary mx-auto decoration-1 underline font-semibold text-xl`}>Anime Type</span>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter3"></input>
-                                <span
-                                    className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter3">Movie</label>
-                            </div>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter4"></input>
-                                <span
-                                    className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter4">OVA</label>
-                            </div>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter5"></input>
-                                <span
-                                    className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter5">TV Series</label>
-                            </div>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter6"></input>
-                                <span
-                                    className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter6">TV Special</label>
-                            </div>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter7"></input>
-                                <span
-                                    className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter7">Web</label>
-                            </div>
-                        </div>
-                        <div
-                            className={`border border-primary w-[250px] rounded-sm flex p-2.5 justify-between flex-col gap-1`}>
-                            <span className={`text-primary mx-auto decoration-1 underline font-semibold text-xl`}>Origin</span>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter8"></input>
-                                <span
-                                    className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter8">China</label>
-                            </div>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter9"></input>
-                                <span
-                                    className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter9">Japan</label>
-                            </div>
-                            <div className={`flex gap-2.5 items-center label`}>
-                                <input className={`hidden`} type="checkbox" id="filter10"></input>
-                                <span
-                                    className={`h-5 w-5 relative rounded-sm p-[3px] border-2 border-primary`}></span>
-                                <label className={`text-primary`} htmlFor="filter10">South Korea</label>
-                            </div>
-                        </div>
+                        <CatalogFilter title={"Airing Status"} type={"airing"} variants={["ignore", "still airing", "finished"]} />
+                        <CatalogFilter title={"Anime Type"} type={"anime"} variants={["Movie", "OVA", "TV Series", "TV Special", "Web"]} />
+                        <CatalogFilter title={"Origin"} type={"origin"} variants={["China", "Japan", "South Korea"]} />
                     </div>
                 </div>
             </div>
